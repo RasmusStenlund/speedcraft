@@ -2,9 +2,28 @@
 
 <html>
 <head>
-    
+    <meta charset = "UTF-8">
+    <link rel = "stylesheet" href = "style.css">
+    <title>Speedcraft</title>
 </head>
 <body>
-    <script src = "src/main.js"></script>
+    <div id="grid">
+        <button data-x="0" data-y="0"></button>
+        <button data-x="1" data-y="0"></button>
+        <button data-x="2" data-y="0"></button>
+        <button data-x="0" data-y="1"></button>
+        <button data-x="1" data-y="1"></button>
+        <button data-x="2" data-y="1"></button>
+        <button data-x="0" data-y="2"></button>
+        <button data-x="1" data-y="2"></button>
+        <button data-x="2" data-y="2"></button>
+    </div>
+    <div id="materials">
+        <button data-material="log">Log</button>
+        <button data-material="planks">Planks</button>
+        <button data-material="">X</button>
+    </div>
+    <button id="clear">Clear Grid</button>
+    <script type = "module" src = "src/main.js"></script>
 </body>
 </html>

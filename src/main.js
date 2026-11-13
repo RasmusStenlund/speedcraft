@@ -9,7 +9,7 @@ const recipes = [
         ["plank"],
         ["plank"]
     ]},
-    {name: "planks", grid: [
+    {name: "plank", grid: [
         ["log"]
     ]}
 ]
@@ -156,9 +156,17 @@ let material = "";
 let recipe = randomRecipe();
 recipeText.innerHTML = recipe.name;
 
+const cursorImage = document.getElementById("cursor-image");
+
+document.addEventListener("mousemove", (event) => {
+    cursorImage.style.top = event.clientY + "px";
+    cursorImage.style.left = event.clientX + "px";
+});
+
 for (const button of materialButtons.children) {
     button.addEventListener("click", () => {
         material = button.getAttribute("data-material");
+        cursorImage.setAttribute("src", `assets/${material}.png`)
     });
 };
 
@@ -168,10 +176,16 @@ for (const button of gridContainer.children) {
     button.addEventListener("click", () => {
         const x = Number(button.getAttribute("data-x"));
         const y = Number(button.getAttribute("data-y"));
-        const image = button.querySelector("img");
 
         grid[y][x] = material;
         renderGrid();
+
+        const image = craftButton.querySelector("img");
+        if (verifyRecipe(recipe)) {
+            image.setAttribute("src", `assets/${recipe.name}.png`);
+        } else {
+            image.removeAttribute("src");
+        };
     });
 };
 
@@ -179,8 +193,9 @@ craftButton.addEventListener("click", () => {
     const crafted = verifyRecipe(recipe);
 
     if (crafted) {
-        console.log("Crafted!")
+        console.log("Crafted!");
         clearGrid();
+        craftButton.querySelector("img").removeAttribute("src");
         recipe = randomRecipe();
         recipeText.innerHTML = recipe.name;
     }
